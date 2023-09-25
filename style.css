@@ -1,0 +1,6 @@
+:;root{
+    --color-accent:rgba(0,255,0,1);
+}
+h1{
+    color:var(--color-accent);
+}

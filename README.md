@@ -14,6 +14,8 @@ cd to frontend, and run `python -m http.server 3000`
 
 # how it is implemented
 
+- frontend: vanilla JS components
+- backend: rust, rocket
 - database: list.json
 - REST API (get and put)
 

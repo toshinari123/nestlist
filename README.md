@@ -10,7 +10,7 @@ features:
 
 cd to frontend, and run `python -m http.server 3000`
 
-install rust, cd to backend, run `cargo run`
+(optional, right now it works with only frontend: install rust, cd to backend, run `cargo run`)
 
 # how it is implemented
 

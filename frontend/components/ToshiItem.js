@@ -27,7 +27,13 @@ class ToshiItem extends HTMLElement{
         this.#stylesheet.replaceSync(await this.#retrieve("ToshiItem.css"));
         this.#root.adoptedStyleSheets = [this.#stylesheet];
         this.#root.innerHTML += await this.#retrieve("ToshiItem.html");
-        this.#root.querySelector("div").innerHTML = this.content;
+        this.#root.querySelector("#title").innerHTML = this.content;
+        this.#root.querySelector("#title").style = "color:" + this.optional.color + ";";
+        if(this.optional.description){
+            this.#root.querySelector("#desc").innerHTML = this.optional.description;
+        }else{
+            this.#root.querySelector("#desc").remove();
+        }
         //this.setAttribute("selected", "true");
         //todo: auto enter editing mode when init (need to set list.editing)
         //this.#events["editItem"]({});
@@ -180,6 +186,8 @@ class ToshiItem extends HTMLElement{
         "saveItem": (e) => {
             let b = this.#root.querySelector("input");
             let a = document.createElement("div");
+            a.id = "title";
+            a.style =  "color:" + this.optional.color + ";";
             this.content = b.value;
             a.innerHTML = this.content;
             b.replaceWith(a);

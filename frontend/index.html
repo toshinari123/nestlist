@@ -35,11 +35,12 @@
           <button id="calendar-close">close</button>
         </dialog>
         <script type='module'>
-            document.eventList = ["up", "down", "add", "del", "edit", "save", "esc", "tab"];
+            document.eventList = ["up", "down", "add", "del", "edit", "save", "esc", "tab", "editcolor"];
             document.editingKeyList = {
                 Enter: "save",
                 Escape: "esc",
                 Tab: "tab",
+                KeyZ: "editcolor"
             };
             document.viewingKeyList = { 
                 ArrowUp: "up",

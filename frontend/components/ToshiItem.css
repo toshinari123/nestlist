@@ -1,4 +1,4 @@
-div {
+#title , #desc{
     color: black;
     font-family: "Lucida Console", Courier, monospace;
     font-size: 12px;
@@ -11,6 +11,21 @@ div {
     width: 100vw;
     white-space: pre;
 }
+
+#desc{
+    color: black;
+    font-family: "Lucida Console", Courier, monospace;
+    font-size: 12px;
+    line-height:12px;
+    padding:0px;
+    margin:0px;
+    border:0px;
+    display: inline-block;
+    height: 12px;
+    width: 100vw;
+}
+
+
 input {
     font-family: "Lucida Console", Courier, monospace;
     font-size: 12px;
@@ -26,10 +41,10 @@ input:not(:focus) {
     border: 1px;
     border-color: black;
 }
-:host-context([selected="true"])>div,input,textarea{
+:host-context([selected="true"])>#title,input,textarea{
     background-color: gray;
     color: white;
 }
-:host(:hover)>div{
+:host(:hover)>#title{
     border: blue solid 1px;
 }

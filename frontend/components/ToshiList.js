@@ -41,6 +41,7 @@ class ToshiList extends HTMLElement{
         a.optional = j.optional;
         a.level = a.core.level;
         a.content = (new String(' ')).repeat(a.level) + j.content;
+        a.optional.color = j.optional.color;
         a.par = par;
         a.lastChild = null;
         this.#root.appendChild(a);
@@ -84,7 +85,7 @@ class ToshiList extends HTMLElement{
     #save() {
         var j = this.#createJson();
         console.log(j);
-        const url = new URL("https://nestspace.net:8001");
+        const url = new URL("list.json");
         fetch(url, {
             method: "PUT",
             mode: "cors",
@@ -232,6 +233,13 @@ class ToshiList extends HTMLElement{
         "esc": (e) => {
             this.#enterOrExitEditing(e, false)
             this.#init();
+        },
+        "editcolor":(e) =>{
+            e.optional.color = "red";
+            let input = window.prompt("Please enter the color for this item","black");
+            if(CSS.supports('color', input)){
+                e.optional.color = input;
+            }
         }
     }
 }

@@ -1,0 +1,35 @@
+div {
+    color: black;
+    font-family: "Lucida Console", Courier, monospace;
+    font-size: 12px;
+    line-height:12px;
+    padding:0px;
+    margin:0px;
+    border:0px;
+    display: inline-block;
+    height: 12px;
+    width: 100vw;
+    white-space: pre;
+}
+input {
+    font-family: "Lucida Console", Courier, monospace;
+    font-size: 12px;
+    line-height:12px;
+    padding:0px;
+    margin:0px;
+    border:1px;
+    display: inline-block;
+    height: 12px;
+    width: 100vw;
+}
+input:not(:focus) {
+    border: 1px;
+    border-color: black;
+}
+:host-context([selected="true"])>div,input,textarea{
+    background-color: gray;
+    color: white;
+}
+:host(:hover)>div{
+    border: blue solid 1px;
+}

@@ -1,0 +1,27 @@
+:root{
+    --color-accent:rgba(0,255,0,1);
+}
+@font-face {
+    font-family: SymbolsOnly;
+    src: url("SymbolsNerdFontMono-Regular.ttf") format("truetype");
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 700;
+}
+body {
+    min-height: 100dvh;
+    padding: 0;
+    margin: 0;
+}
+dialog {
+    font-family: "Lucida Console", Courier, monospace;
+}
+.floatingButtons {
+    width: min(10%, 50px);
+    align: center;
+    position: fixed;
+    bottom: 0;
+    right: 10px;
+    /* left: 10px later do insertRule or smth */
+    z-index: 1000;
+}

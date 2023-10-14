@@ -1,5 +1,15 @@
 # nestlist
 
+# structure
+
+# Folder Structure
+
+# Frontend folder structure
+
+# Backend Folder Structures
+
+# Database Folder Structure
+
 nestlist is a COOL USEFUL and CONVENIENT tool that EVERYONE in NESTSPACE uses to keep track of current projects and things to do.
 
 features:

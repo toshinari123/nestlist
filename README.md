@@ -9,7 +9,7 @@ features:
 There are three folders: Database , frontend and backend. Here's the responsibility of each folder. 
 
 - frontend
-  . save the files realted to UI and UX only.__
+  . save the files realted to UI and UX only. <br/>
   . The files should be seperate to folders so that the next developer can resure the code__
   . Component Base coding instead on spegattie code.__
   . Comment on top of each file is a must if not comment developer should not use the coede. At least general say what it does.__

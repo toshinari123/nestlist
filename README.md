@@ -10,28 +10,28 @@ There are three folders: Database , frontend and backend. Here's the responsibil
 
 - frontend
   . save the files realted to UI and UX only. <br/>
-  . The files should be seperate to folders so that the next developer can resure the code__
-  . Component Base coding instead on spegattie code.__
-  . Comment on top of each file is a must if not comment developer should not use the coede. At least general say what it does.__
+  . The files should be seperate to folders so that the next developer can resure the code <br/>
+  . Component Base coding instead on spegattie code. <br/>
+  . Comment on top of each file is a must if not comment developer should not use the coede. At least general say what it does. <br/>
 - Backend
-  . Connect Frontend and Database__
-  . Edit / Delete the data from the database__
-  . Should be encrypt for sercurity issue__
+  . Connect Frontend and Database <br/>
+  . Edit / Delete the data from the database <br/>
+  . Should be encrypt for sercurity issue <br/>
 - Database
   .Check issue column
 
 # Frontend folder structure
-  . Assests: For pictures and videos__
-  . Components: HTML files that can resure__
-  . DataAlgorithm : JS files for fetching data__
-  . UserAlgorithm : JS files for fetching UX__
-  . Styles: CSS files__
+  . Assests: For pictures and videos <br/>
+  . Components: HTML files that can resure <br/>
+  . DataAlgorithm : JS files for fetching data <br/>
+  . UserAlgorithm : JS files for fetching UX <br/>
+  . Styles: CSS files <br/>
   . index.html 
 
 # Backend Folder Structures
-  . Security __
-  . DatabaseConnection__
-  . FrontendConnection__
+  . Security <br/>
+  . DatabaseConnection <br/>
+  . FrontendConnection <br/>
   . main.rs 
 
 # Database Folder Structure

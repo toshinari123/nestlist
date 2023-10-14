@@ -1,5 +1,12 @@
 # nestlist
 
+nestlist is a COOL USEFUL and CONVENIENT tool that EVERYONE in NESTSPACE uses to keep track of current projects and things to do.
+
+features:
+- nested tasks: each task can have subtasks which can have subtasks and so on
+
+
+
 # structure
 
 # Folder Structure
@@ -10,11 +17,7 @@
 
 # Database Folder Structure
 
-nestlist is a COOL USEFUL and CONVENIENT tool that EVERYONE in NESTSPACE uses to keep track of current projects and things to do.
 
-features:
-- nested tasks: each task can have subtasks which can have subtasks and so on
-- thats basically it
 
 # how to test
 

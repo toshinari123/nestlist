@@ -1,6 +1,31 @@
 .btn{
+    margin: 5px , 5px , 5px , 5px;
+    color: white;
+    border: 1px;
+    border-radius: 6px;
+    height: 35px;
+    width: 55px;
+}
 
+.btn-blue{
     background-color: #3b82f6;
-    border: 0px;
+}
 
+.btn-blue:hover{
+    background-color: #60a5fa;
+}
+
+.btn-red{
+    background-color: #e11d48;
+}
+
+.btn-red:hover{
+    background-color: #fb7185;
+}
+
+.btn-secondary{
+    background-color: #6b7280;
+}
+.btn-secondary:hover{
+    background-color: #9ca3af;
 }

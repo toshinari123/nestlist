@@ -35,7 +35,7 @@ There are three folders: Database , frontend and backend. Here's the responsibil
   . main.rs 
 
 # Database Folder Structure
-  .Please reply soon
+  .Data Save in Backend Directly
   
 # Variable and Class naming system
   
@@ -55,6 +55,7 @@ cd to frontend, and run `python -m http.server 3000`
 - REST API (get and put)
 
 # todo
+- Log in System
 - Rewrite the code with better structure
 - Database establishment
 - Documentation before going to next version

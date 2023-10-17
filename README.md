@@ -55,8 +55,7 @@ cd to frontend, and run `python -m http.server 3000`
 - REST API (get and put)
 
 # todo
-- Log in System
-- Rewrite the code with better structure
-- Database establishment
-- Documentation before going to next version
+- Log in System v1 
+- Rewrite the code with better structure v1
+- Documentation before going to next version v1
 - websocket to real time update the list

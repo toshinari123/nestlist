@@ -4,7 +4,6 @@ class ToshiItem extends HTMLElement{
     #listeners = {};
     #observer;
     #content;
-    level;
     //make a pointers object instead
     par;
     lastChild;
@@ -69,14 +68,15 @@ class ToshiItem extends HTMLElement{
         this.#content = newContent;
     }
     //use this after init
-    #setContent(newContent) {
-        this.#content = newContent;
+    setContent(newContent) {
+        this.#content = newContent.trim();
         if (this.#root.querySelector("div")) {
             this.#root.querySelector("div").innerHTML = newContent;
         }
         if (this.#root.querySelector("input")) {
             this.#root.querySelector("input").value = newContent;
         }
+        this.onChange(newContent);
     }
     #findLevel(s) {
         let i = 0;
@@ -86,41 +86,60 @@ class ToshiItem extends HTMLElement{
         return i;
     }
     #findPar() {
-        if (this.level == 0) { return null; }
+        if (this.core.level == 0) { return null; }
         let p = this;
-        while (p != null && p.level >= this.level) { p = p.prev; };
+        while (p != null && p.core.level >= this.core.level) { p = p.prev; };
         return p;
     }
     #replaceAt(str, index, replacement) {
         return str.slice(0, index) + replacement + str.slice(index + replacement.length);
     }
     //check if this.par exist before calling vertical
-    //this function finds the bottommost item above this that has level <= this.level (parent or sibling)
+    //this function finds the bottommost item above this that has level <= this.core.level (parent or sibling)
     vertical(addordel, realdel) {
         let p = this.prev;
-        while (p != null && p.par != this.par && p != this.par) {
-            p.#setContent(this.#replaceAt(p.content, this.par.level, addordel ? "\u2503" : " "));
+        while (p != null && p.core.level > this.core.level) {
+            p.setContent(this.#replaceAt(p.content, this.par.core.level, addordel ? "\u2503" : " "));
             p = p.prev;
         }
         if (p != this.par) {
-            p.#setContent(this.#replaceAt(p.content, this.par.level, addordel ? "\u2523" : "\u2517"));
+            if (this.par.lastChild == this) { p.setContent(this.#replaceAt(p.content, this.par.core.level, addordel ? "\u2523" : "\u2517")); }
             if (realdel) {
-                this.par.lastChild = p;
+                if (this.par.lastChild == this) { this.par.lastChild = p; }
                 p.lastChild = this.lastChild;
             }
         } else {
-            if (realdel) { this.par.lastChild = null; }
+            if (realdel && this.par.lastChild == this) { this.par.lastChild = null; }
+        }
+    }
+    down() {
+        let n = this.next;
+        let prev = null;
+        while (n != null && n.core.level > this.core.level) {
+            if (n.par == this.par) n.par = this;
+            if (n.par == this) prev = n;
+            n = n.next;
+        }
+        if (!this.lastChild) this.lastChild = prev;
+        if (this.par && n && n.core.level <= this.par.core.level) {
+            this.par.lastChild = this;
+        }
+        this.horizontal();
+        n = this.next;
+        while (n != null && n.core.level > this.core.level) {
+            n.horizontal();
+            n = n.next;
         }
     }
     horizontal() {
 		let temp = "";
-        for (let i = 0; i < (this.par ? this.par.level : 0); i++) {
+        for (let i = 0; i < (this.par ? this.par.core.level : 0); i++) {
             temp = temp + ((this.par.content[i] == "\u2503" || this.par.content[i] == "\u2523") ? "\u2503" : " ");
         }
-        this.#setContent(temp + this.content.slice((this.par ? this.par.level : 0)));
-        if (this.par) { this.#setContent(this.#replaceAt(this.content, this.par.level, this.par.lastChild == this ? "\u2517" : "\u2523")); }
-        for (let i = (this.par ? this.par.level : 0) + 1; i < this.level; i++) {
-            this.#setContent(this.#replaceAt(this.content, i, "\u2501"));
+        this.setContent(temp + this.content.slice((this.par ? this.par.core.level : 0)));
+        if (this.par) { this.setContent(this.#replaceAt(this.content, this.par.core.level, this.par.lastChild == this ? "\u2517" : "\u2523")); }
+        for (let i = (this.par ? this.par.core.level : 0) + 1; i < this.core.level; i++) {
+            this.setContent(this.#replaceAt(this.content, i, "\u2501"));
         }
     }
     onChange(v) {
@@ -130,9 +149,9 @@ class ToshiItem extends HTMLElement{
         //}
         this.content = v;
         var newLevel = this.#findLevel(v);
-        if (this.level != newLevel) {
+        if (this.core.level != newLevel) {
             if (this.par && this.par.lastChild == this) { this.vertical(false, false); }
-            this.level = newLevel;
+            this.core.level = newLevel;
             this.par = this.#findPar();
             if (this.par) {
                 //compute if current is the last child of parent
@@ -164,7 +183,7 @@ class ToshiItem extends HTMLElement{
     }
     setCore() {
         if (!this.core.uuid) { this.core.uuid = crypto.randomUUID(); }
-        if (!this.core.level) { this.core.level = this.level; }
+        this.setAttribute("id", "uuid:" + this.core.uuid);
         if (!this.core.done) { this.core.done = false; }
     }
     #events = {
@@ -191,7 +210,7 @@ class ToshiItem extends HTMLElement{
             b.replaceWith(a);
         },
         "tabItem": (e) => {
-            this.#setContent("  " + this.content);
+            this.setContent("  " + this.content);
             this.onChange(this.content);
         }
     }

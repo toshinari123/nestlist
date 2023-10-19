@@ -1,0 +1,23 @@
+:root {
+    --L-width: 1px;
+}
+#main {
+    position: absolute;
+    font-family: "Lucida Console", Courier, monospace;
+    white-space: pre;
+    resize: none;
+    border-color: transparent;
+    font-size: 1em;
+}
+#main:focus {
+    outline: none;
+}
+.L {
+    /*background-color: blue;*/
+    position: absolute;
+    z-index: 1000;
+    border-top: 0px solid black;
+    border-right: 0px solid black;
+    border-bottom: 1.5px solid black;
+    border-left: 1.5px solid black;
+}

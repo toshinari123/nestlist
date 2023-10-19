@@ -1,0 +1,3 @@
+https://www.section.io/engineering-education/how-to-get-ssl-https-for-localhost/
+https://docs.rs/native-tls/latest/native_tls/struct.Identity.html
+https://smallbusiness.chron.com/make-computer-trust-certificate-authority-57649.html

@@ -43,9 +43,13 @@ There are three folders: Database , frontend and backend. Here's the responsibil
 
 # how to test
 
-cd to frontend, and run `python -m http.server 3000`
+cd to frontend, and run `python test.py` (it will host on https://localhost:3000)
 
-(optional, right now it works with only frontend: install rust, cd to backend, run `cargo run`)
+firefox doesnt work? (cors shit)
+
+optionally test with backend: install rust, cd to backend, run `cargo run --features local`
+
+(set environment variable `ROCKET_TLS` to `{certs="../cert/CA/localhost/localhost.crt",key="../cert/CA/localhost/localhost.decrypted.key"}` before cargo running)
 
 # how it is implemented
 

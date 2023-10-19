@@ -6,8 +6,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        <toshi-list></toshi-list>
+        <toshi-list file="/list.txt"></toshi-list>
         <footer class="floatingButtons">
+            <toshi-button onclick="
+                const eve = new CustomEvent('add', document.eventOptions);
+                document.getElementsByTagName('toshi-list')[0].dispatchEvent(eve);
+                " icon="nf-md-plus"></toshi-button>
+            <toshi-button onclick="
+                const eve = new CustomEvent('del', document.eventOptions);
+                document.getElementsByTagName('toshi-list')[0].dispatchEvent(eve);
+                " icon="nf-md-minus"></toshi-button>
             <toshi-button id="settings-button" icon="nf-oct-gear"></toshi-button>
             <toshi-button id="calendar-button" icon="nf-fa-calendar"></toshi-button>
         </footer>
@@ -27,17 +35,53 @@
           <button id="calendar-close">close</button>
         </dialog>
         <script type='module'>
+            document.eventList = ["up", "down", "add", "del", "edit", "save", "esc", "tab"];
+            document.editingKeyList = {
+                Enter: "save",
+                Escape: "esc",
+                Tab: "tab",
+            };
+            document.viewingKeyList = { 
+                ArrowUp: "up",
+                KeyK: "up",
+                ArrowDown: "down",
+                KeyJ: "down",
+                Enter: "add",
+                Delete: "del",
+				Backspace: "del",
+                KeyI: "edit",
+            };
             document.optionalDetailsList = ["status", "deadline", "responsible", "creator", "lastEditor", "createdTime", "lastEditedTime"]
             document.eventOptions = { bubbles: true, cancelable: false, composed: true };
             document.nestSymbols = " \u2503\u2523\u2517\u2501\u2501";
 
-            import {ToshiList} from "/components/ToshiList/ToshiList.js";
+            import {ToshiItem} from "/components/ToshiItem.js";
+            window.customElements.define('toshi-item', ToshiItem);
+            import {ToshiList} from "/components/ToshiList.js";
             window.customElements.define('toshi-list', ToshiList);
-            import {ToshiButton} from "/components/ToshiButton/ToshiButton.js";
+            import {ToshiButton} from "/components/ToshiButton.js";
             window.customElements.define('toshi-button', ToshiButton);
-            import {ToshiTextArea} from "/components/ToshiTextArea/ToshiTextArea.js";
-            window.customElements.define('toshi-textarea', ToshiTextArea, {extends: "textarea"});
 
+            document.addEventListener('keydown', (e) => {
+                if ("Tab" == event.code) { e.preventDefault(); }
+            });
+            document.addEventListener('keyup', (e) => {
+                if (document.getElementsByTagName("toshi-list")[0].editing){
+                    for (const [k, e] of Object.entries(document.editingKeyList)) {
+                        if (event.code == k) {
+                            const eve = new CustomEvent(e, document.eventOptions);
+                            document.getElementsByTagName("toshi-list")[0].dispatchEvent(eve);
+                        }
+                    }
+                } else {
+                    for (const [k, e] of Object.entries(document.viewingKeyList)) {
+                        if (event.code == k) {
+                            const eve = new CustomEvent(e, document.eventOptions);
+                            document.getElementsByTagName("toshi-list")[0].dispatchEvent(eve);
+                        }
+                    }
+                } 
+            });
             document.querySelector("#settings-button").addEventListener("click", () => {
                 document.querySelector("#settings-dialog").showModal();
             });

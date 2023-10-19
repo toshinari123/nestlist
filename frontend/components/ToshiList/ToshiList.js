@@ -317,6 +317,7 @@ class ToshiList extends HTMLElement{
                                         this.#items[uind].content = o[u].list.content;
                                         a[uind] = ' '.repeat(o[u].list.core.level) +  o[u].list.content;
                                         ta.value = a.join('\n')
+                                        this.#content = ta.value;
                                         this.#updateVisual();
                                         ta.autoGrow();
                                         break;
@@ -324,6 +325,8 @@ class ToshiList extends HTMLElement{
                                         a.splice(pind + 1, 0, ' '.repeat(this.#items[pind].core.level + 2) + '[]');
                                         ta.value = a.join('\n');
                                         this.#add(pind + 1);
+                                        this.#items[pind + 1].core.uuid = u;
+                                        this.#content = ta.value;
                                         this.#updateVisual();
                                         ta.autoGrow();
                                         break;
@@ -331,6 +334,7 @@ class ToshiList extends HTMLElement{
                                         a.splice(uind, 1);
                                         ta.value = a.join('\n');
                                         this.#del(uind);
+                                        this.#content = ta.value;
                                         this.#updateVisual();
                                         break;
                                     default:

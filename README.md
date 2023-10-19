@@ -67,3 +67,7 @@ optionally test with backend: install rust, cd to backend, run `cargo run --feat
 v1: only frontend
 v2: rust backend
 v3: websockets + refactored backend + rewrote frontend
+
+# images
+![image](https://miro.medium.com/v2/resize:fit:1100/format:webp/1*QvoCVKVXB76z4OlKG2PP-w.png)
+![image](https://lucid.app/publicSegments/view/c039f172-055c-4ac9-9289-062e8cc8b1a9/image.png)

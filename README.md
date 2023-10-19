@@ -62,4 +62,8 @@ optionally test with backend: install rust, cd to backend, run `cargo run --feat
 - Log in System v1 
 - Rewrite the code with better structure v1
 - Documentation before going to next version v1
-- websocket to real time update the list
+
+# versions
+v1: only frontend
+v2: rust backend
+v3: websockets + refactored backend + rewrote frontend

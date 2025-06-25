@@ -43,13 +43,22 @@ There are three folders: Database , frontend and backend. Here's the responsibil
 
 # how to test
 
-cd to frontend, and run `python test.py` (it will host on https://localhost:3000)
+backend: `nix develop .#backend`
 
-firefox doesnt work? (cors shit)
+frontend + caddy: `nix develop .#caddy`
 
-optionally test with backend: install rust, cd to backend, run `cargo run --features local`
+just run the above commands in root, no need to cd
 
-(set environment variable `ROCKET_TLS` to `{certs="../cert/CA/localhost/localhost.crt",key="../cert/CA/localhost/localhost.decrypted.key"}` before cargo running)
+nix develop puts up a shell, so to exit completely you have to stop the process and type `exit`
+
+for first time (and once in a while) using caddy, it will need sudo access to install the local certificate; if you encounter trouble entering sudo password like me, just stop the caddy and enter `sudo caddy trust` then `exit` and restart the nix developer shell
+
+note: need to manually trust certs by accessing the following in browser and press acept risk and continue:
+- https://localhost:3000
+- https://localhost:8000 
+- https://localhost:8002 
+
+note note: need to allow insecure self-signed wss connection (on chrome its chrome://flags/#allow-insecure-localhost)
 
 # how it is implemented
 
@@ -67,6 +76,7 @@ optionally test with backend: install rust, cd to backend, run `cargo run --feat
 v1: only frontend
 v2: rust backend
 v3: websockets + refactored backend + rewrote frontend
+v4: tried out using caddy because it can autogen tls certs for local testing, moved cors into caddy as well
 
 # images
 ![image](https://miro.medium.com/v2/resize:fit:1100/format:webp/1*QvoCVKVXB76z4OlKG2PP-w.png)

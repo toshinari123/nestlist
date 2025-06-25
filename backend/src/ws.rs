@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+use std::net::TcpStream;
 use std::fs::metadata;
 use std::sync::{Arc, RwLock};
 use std::time::SystemTime;
@@ -113,7 +114,11 @@ fn process_ws(msg: String, state: Arc<RwLock<WsState>>) -> Result<String, String
     }
 }
 
-pub fn handle_client<S: Read + Write>(stream: TlsStream<S>, state: Arc<RwLock<WsState>>) -> Result<()> {
+pub trait TransportStream: Read + Write + Sized {}
+impl<S: Read + Write> TransportStream for TlsStream<S> {}
+impl TransportStream for TcpStream {}
+
+pub fn handle_client<S: TransportStream>(stream: S, state: Arc<RwLock<WsState>>) -> Result<()> {
     let mut socket = accept(stream).map_err(must_not_block)?;
     loop {
         match socket.read()? {

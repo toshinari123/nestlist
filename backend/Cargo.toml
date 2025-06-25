@@ -16,3 +16,4 @@ tungstenite = { version = "0.20.1", features = ["native-tls"] }
 
 [features]
 local = ["rocket/tls"]
+caddy = []

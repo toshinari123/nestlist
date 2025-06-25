@@ -107,11 +107,12 @@ class ToshiList extends HTMLElement{
         }
         let p = this.#items[o.par];
         let css = "";
+        let fontwidth = 1234;
         //1234 / 2048 is ratio of width to height i think
         css += "top: " + (o.par + 1) + "em;";
-        css += "left: " + ((p.core.level + 1) * 1234 / 2048) + "em;";
+        css += "left: " + ((p.core.level + 1) * fontwidth / 2048) + "em;";
         css += "height: " + (ind - o.par - 0.5) + "em;";
-        css += "width: " + ((o.core.level - p.core.level - 0.5) * 1234 / 2048) + "em;";
+        css += "width: " + ((o.core.level - p.core.level - 0.5) * fontwidth / 2048) + "em;";
         return css;
     }
     #createJson() {

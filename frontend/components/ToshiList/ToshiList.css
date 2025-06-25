@@ -8,6 +8,7 @@
     resize: none;
     border-color: transparent;
     font-size: 1em;
+    line-height: 1.0;
 }
 #main:focus {
     outline: none;
@@ -20,4 +21,5 @@
     border-right: 0px solid black;
     border-bottom: 1.5px solid black;
     border-left: 1.5px solid black;
+    font-size: 1em;
 }

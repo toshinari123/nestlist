@@ -1,0 +1,58 @@
+#https://caddy.community/t/cant-get-tls-internal-to-work-get-internal-error-in-openssl/30732
+{
+    auto_https disable_redirects
+}
+
+:3000 {
+	tls internal {
+		on_demand
+	}
+	root * ./frontend
+	file_server
+}
+
+#from https://webinstall.dev/caddy/
+(cors-origin) {
+	@match-cors-preflight-{args[0]} {
+		header Origin "{args[0]}"
+		method OPTIONS
+	}
+	handle @match-cors-preflight-{args[0]} {
+		header {
+			Access-Control-Allow-Origin "{args[0]}"
+			Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+			Access-Control-Allow-Headers "content-type"
+			Access-Control-Allow-Credentials true
+			Access-Control-Max-Age "3600"
+			defer
+		}
+		respond "" 204
+	}
+
+	@match-cors-request-{args[0]} {
+		header Origin "{args[0]}"
+		not method OPTIONS
+	}
+	handle @match-cors-request-{args[0]} {
+		header {
+			Access-Control-Allow-Origin "{http.request.header.origin}"
+			Access-Control-Expose-Headers *
+			defer
+		}
+	}
+}
+
+:8000 {
+	tls internal {
+		on_demand
+	}
+	import cors-origin https://localhost:3000
+	reverse_proxy http://localhost:8001
+}
+
+:8002 {
+	tls internal {
+		on_demand
+	}
+	reverse_proxy http://localhost:8003
+}
